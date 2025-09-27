@@ -1,0 +1,48 @@
+class Planeta {
+    public String nombre;
+    public int numsatelites;
+    public double masa;
+    public double volumen;
+    public int diametro;
+    public int distanciasol;
+    public boolean observable;
+    public double periodoorbital;
+    public double rotacion;
+    
+    public Planeta(String nombre, int numsatelites, double masa, double volumen, int diametro, int distanciasol, boolean observable, double periodoorbital, double rotacion){
+        this.nombre = nombre;
+        this.numsatelites = numsatelites;
+        this.masa = masa;
+        this.volumen = volumen;
+        this.diametro = diametro;
+        this.distanciasol = distanciasol;
+        this.observable = observable;
+        this.periodoorbital = periodoorbital;
+        this.rotacion = rotacion;
+    }
+
+    public void imprimir() {
+        System.out.println("Nombre: " + nombre);
+        System.out.println("Número de satélites: " + numsatelites);
+        System.out.println("Masa (Kilogramos*10^24): " + masa);
+        System.out.println("Volumen (Kilómetros Cúbicos*10^12): " + volumen);
+        System.out.println("Diámetro (Kilómetros): " + diametro);
+        System.out.println("Distancia al Sol (Kilómetros): " + distanciasol);
+        System.out.println("¿Es observable? " + observable);
+        System.out.println("Duración del período orbital (Días terrestres): " + periodoorbital);
+        System.out.println("Duración de la rotación (Horas): " + rotacion);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Planeta p1 = new Planeta("Tierra", 1, 5.972, 1.083, 12760, 150000000, true, 365.25, 24);
+        Planeta p2 = new Planeta("Marte", 2, 0.64171, 0.163, 6792, 227900000, true, 687, 24.6);
+        System.out.println("Planeta #1:");
+        p1.imprimir();
+        System.out.println();
+        
+        System.out.println("Planeta #2:");
+        p2.imprimir();
+    }
+}
