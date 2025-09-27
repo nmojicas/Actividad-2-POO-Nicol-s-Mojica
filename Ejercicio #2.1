@@ -1,15 +1,18 @@
-
 class Persona {
     private String nombre;
     private String apellido;
     private String documento;
     private int fecha;
+    private String pais;
+    private char genero;
     
-    public Persona(String nombre, String apellido, String documento, int fecha){
+    public Persona(String nombre, String apellido, String documento, int fecha, char genero, String pais){
        this.nombre = nombre;
        this.apellido = apellido;
        this.documento = documento;
        this.fecha = fecha;
+       this.genero = genero;
+       this.pais = pais;
     }
     
     public void Imprimir() {
@@ -17,13 +20,15 @@ class Persona {
     System.out.println("Apellido: " + apellido);
     System.out.println("Documento de identidad: "+ documento);
     System.out.println("Fecha de nacimiento: "+ fecha);
+    System.out.println("Género: "+ genero);
+    System.out.println("País: "+ pais);
     }
 }
 
 public class Main {
     public static void main (String[] args) {
-        Persona p1 = new Persona("María", "Sánchez", "1039232291", 1999);
-        Persona p2 = new Persona("Nicolás", "Mojica", "1091358121", 2006);
+        Persona p1 = new Persona("María", "Sánchez", "1039232291", 1999, 'F', "Venezuela");
+        Persona p2 = new Persona("Nicolás", "Mojica", "1091358121", 2006, 'M', "Colombia");
             System.out.println("Persona #1:");
             p1.Imprimir();
             System.out.println("Persona #2:");
