@@ -1,0 +1,145 @@
+enum Tipocomb {
+    GASOLINA, BIOETANOL, DIESEL, BIODIESEL, GAS_NATURAL
+}
+
+enum Tipoauto {
+    CIUDAD, SUBCOMPACTO, COMPACTO, FAMILIAR, EJECUTIVO, SUV
+}
+
+enum Tipocolor {
+    BLANCO, NEGRO, ROJO, NARANJA, AMARILLO, VERDE, AZUL, VIOLETA
+}
+
+public class Automovil {
+    private String marca;
+    private String modelo;
+    private int motor;
+    private Tipocomb comb;
+    private Tipoauto tipo;
+    private int puertas;
+    private int asientos;
+    private int velmax;
+    private Tipocolor color;
+    private int velact;
+    private boolean automatico;
+
+    private int multas;
+    private double valmulta;
+
+    public Automovil(String marca, String modelo, int motor, Tipocomb comb,
+                     Tipoauto tipo, int puertas, int asientos,
+                     int velmax, Tipocolor color, boolean automatico) {
+        this.marca = marca;
+        this.modelo = modelo;
+        this.motor = motor;
+        this.comb = comb;
+        this.tipo = tipo;
+        this.puertas = puertas;
+        this.asientos = asientos;
+        this.velmax = velmax;
+        this.color = color;
+        this.velact = 0;
+        this.automatico = automatico;
+        this.multas = 0;
+        this.valmulta = 0.0;
+    }
+
+    public String getMarca() { return marca; }
+    public String getModelo() { return modelo; }
+    public int getMotor() { return motor; }
+    public Tipocomb getComb() { return comb; }
+    public Tipoauto getTipo() { return tipo; }
+    public int getPuertas() { return puertas; }
+    public int getAsientos() { return asientos; }
+    public int getVelmax() { return velmax; }
+    public Tipocolor getColor() { return color; }
+    public int getVelact() { return velact; }
+    public boolean isAutomatico() { return automatico; }
+    public int getMultas() { return multas; }
+    public double getValmulta() { return valmulta; }
+
+    public void setMarca(String marca) { this.marca = marca; }
+    public void setModelo(String modelo) { this.modelo = modelo; }
+    public void setMotor(int motor) { this.motor = motor; }
+    public void setComb(Tipocomb comb) { this.comb = comb; }
+    public void setTipo(Tipoauto tipo) { this.tipo = tipo; }
+    public void setPuertas(int puertas) { this.puertas = puertas; }
+    public void setAsientos(int asientos) { this.asientos = asientos; }
+    public void setVelmax(int velmax) { this.velmax = velmax; }
+    public void setColor(Tipocolor color) { this.color = color; }
+    public void setVelact(int velact) { this.velact = velact; }
+    public void setAutomatico(boolean automatico) { this.automatico = automatico; }
+
+    public void acelerar(int inc) {
+        velact += inc;
+        if (velact > velmax) {
+            generarMulta();
+            velact = velmax;
+        }
+    }
+
+    public void desacelerar(int dec) {
+        velact -= dec;
+        if (velact < 0) velact = 0;
+    }
+
+    public void frenar() {
+        velact = 0;
+    }
+
+    public double tiempoLlegada(double dist) {
+        if (velact <= 0) return -1;
+        return dist / velact;
+    }
+
+    private void generarMulta() {
+        multas++;
+        double multa = 500.0 * multas;
+        valmulta += multa;
+        System.out.println("Exceso de velocidad detectado! el valor de la multa es: $" + multa);
+        System.out.println("por favor tenga cuidado con la velocidad la proxima vez");
+    }
+
+    public boolean tieneMulta() {
+        return multas > 0;
+    }
+
+    public double totalMulta() {
+        return valmulta;
+    }
+
+    public void imprimir() {
+        System.out.println("Marca: " + marca);
+        System.out.println("Modelo: " + modelo);
+        System.out.println("Motor: " + motor);
+        System.out.println("Combustible: " + comb);
+        System.out.println("Tipo: " + tipo);
+        System.out.println("Puertas: " + puertas);
+        System.out.println("Asientos: " + asientos);
+        System.out.println("Vel máx: " + velmax);
+        System.out.println("Color: " + color);
+        System.out.println("Vel actual: " + velact);
+        System.out.println("Auto automático: " + (automatico ? "Sí" : "No"));
+        System.out.println("Multas: " + multas);
+        System.out.println("Valor multas: $" + valmulta);
+    }
+
+    public static void main(String[] args) {
+        Automovil a1 = new Automovil("Corvette", "2013", 3, Tipocomb.GASOLINA,
+                Tipoauto.COMPACTO, 5, 6, 250, Tipocolor.NEGRO, true);
+
+        a1.imprimir();
+        a1.acelerar(100);
+        System.out.println("Vel actual: " + a1.getVelact());
+        a1.acelerar(270);
+        System.out.println("Vel actual: " + a1.getVelact());
+        a1.desacelerar(55);
+        System.out.println("Vel actual: " + a1.getVelact());
+        a1.acelerar(100);
+        System.out.println("Vel actual: " + a1.getVelact());
+        System.out.println("Tiempo 500 km: " + a1.tiempoLlegada(500) + " horas");
+        a1.frenar();
+        System.out.println("Vel actual: " + a1.getVelact());
+        a1.imprimir();
+    }
+}
