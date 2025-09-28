@@ -1,0 +1,159 @@
+class Circulo {
+    int radio;
+
+    Circulo(int radio) {
+        this.radio = radio;
+    }
+
+    double calcularArea() {
+        return Math.PI * Math.pow(radio, 2);
+    }
+
+    double calcularPerimetro() {
+        return 2 * Math.PI * radio;
+    }
+}
+
+class Rectangulo {
+    int base;
+    int altura;
+
+    Rectangulo(int base, int altura) {
+        this.base = base;
+        this.altura = altura;
+    }
+
+    double calcularArea() {
+        return base * altura;
+    }
+
+    double calcularPerimetro() {
+        return (2 * base) + (2 * altura);
+    }
+}
+
+class Cuadrado {
+    int lado;
+
+    Cuadrado(int lado) {
+        this.lado = lado;
+    }
+
+    double calcularArea() {
+        return lado * lado;
+    }
+
+    double calcularPerimetro() {
+        return 4 * lado;
+    }
+}
+
+class TrianguloRectangulo {
+    int base;
+    int altura;
+
+    TrianguloRectangulo(int base, int altura) {
+        this.base = base;
+        this.altura = altura;
+    }
+
+    double calcularArea() {
+        return (base * altura / 2);
+    }
+
+    double calcularPerimetro() {
+        return (base + altura + calcularHipotenusa());
+    }
+
+    double calcularHipotenusa() {
+        return Math.pow(base * base + altura * altura, 0.5);
+    }
+
+    void determinarTipoTriangulo() {
+        if ((base == altura) && (base == calcularHipotenusa()) && (altura == calcularHipotenusa()))
+            System.out.println("Es un triángulo equilátero");
+        else if ((base != altura) && (base != calcularHipotenusa()) && (altura != calcularHipotenusa()))
+            System.out.println("Es un triángulo escaleno");
+        else
+            System.out.println("Es un triángulo isósceles");
+    }
+}
+
+class Rombo {
+    int diagonalmayor;
+    int diagonalmenor;
+    int lado;
+
+    Rombo(int diagonalmayor, int diagonalmenor, int lado) {
+        this.diagonalmayor = diagonalmayor;
+        this.diagonalmenor = diagonalmenor;
+        this.lado = lado;
+    }
+
+    double calcularArea() {
+        return (diagonalmayor * diagonalmenor) / 2.0;
+    }
+
+    double calcularPerimetro() {
+        return 4 * lado;
+    }
+}
+
+class Trapecio {
+    int basemayor;
+    int basemenor;
+    int lado1;
+    int lado2;
+    int altura;
+
+    Trapecio(int basemayor, int basemenor, int lado1, int lado2, int altura) {
+        this.basemayor = basemayor;
+        this.basemenor = basemenor;
+        this.lado1 = lado1;
+        this.lado2 = lado2;
+        this.altura = altura;
+    }
+
+    double calcularArea() {
+        return ((basemayor + basemenor) * altura) / 2.0;
+    }
+
+    double calcularPerimetro() {
+        return basemayor + basemenor + lado1 + lado2;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Circulo figura1 = new Circulo(11);
+        Rectangulo figura2 = new Rectangulo(3, 2);
+        Cuadrado figura3 = new Cuadrado(2);
+        TrianguloRectangulo figura4 = new TrianguloRectangulo(3, 5);
+        Rombo figura5 = new Rombo(6, 4, 1);
+        Trapecio figura6 = new Trapecio(1, 4, 3, 3, 5);
+
+        System.out.println("El área del círculo es: " + figura1.calcularArea());
+        System.out.println("El perímetro del círculo es: " + figura1.calcularPerimetro());
+        System.out.println();
+
+        System.out.println("El área del rectángulo es: " + figura2.calcularArea());
+        System.out.println("El perímetro del rectángulo es: " + figura2.calcularPerimetro());
+        System.out.println();
+
+        System.out.println("El área del cuadrado es: " + figura3.calcularArea());
+        System.out.println("El perímetro del cuadrado es: " + figura3.calcularPerimetro());
+        System.out.println();
+
+        System.out.println("El área del triángulo es: " + figura4.calcularArea());
+        System.out.println("El perímetro del triángulo es: " + figura4.calcularPerimetro());
+        figura4.determinarTipoTriangulo();
+        System.out.println();
+
+        System.out.println("El área del rombo es: " + figura5.calcularArea());
+        System.out.println("El perímetro del rombo es: " + figura5.calcularPerimetro());
+        System.out.println();
+
+        System.out.println("El área del trapecio es: " + figura6.calcularArea());
+        System.out.println("El perímetro del trapecio es: " + figura6.calcularPerimetro());
+    }
+}
