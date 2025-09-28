@@ -1,0 +1,69 @@
+public class banco {
+    String nombresTitular;
+    String apellidosTitular;
+    int numeroCuenta;
+
+    enum Tipo {AHORROS, CORRIENTE}
+    Tipo tipoCuenta;
+    float saldo = 25000;
+    float interesMensual;
+
+    banco(String nombresTitular, String apellidosTitular, int numeroCuenta, Tipo tipoCuenta, float interesMensual) {
+        this.nombresTitular = nombresTitular;
+        this.apellidosTitular = apellidosTitular;
+        this.numeroCuenta = numeroCuenta;
+        this.tipoCuenta = tipoCuenta;
+        this.interesMensual = interesMensual;
+    }
+
+    void imprimir() {
+        System.out.println("Nombres del titular : " + nombresTitular);
+        System.out.println("Apellidos del titular : " + apellidosTitular);
+        System.out.println("Número de cuenta: " + numeroCuenta);
+        System.out.println("Tipo de cuenta: " + tipoCuenta);
+        System.out.println("Saldo = " + saldo);
+        System.out.println("Interés mensual : " + interesMensual + "%");
+    }
+
+    void consultarSaldo() {
+        System.out.println("El saldo actual es : " + saldo);
+    }
+
+    boolean consignar(int valor) {
+        if (valor > 0) {
+            saldo = saldo + valor;
+            System.out.println("Se ha consignado $" + valor + " en la cuenta. El nuevo saldo es $" + saldo);
+            return true;
+        } else {
+            System.out.println("No se puede retirar valores menores o iguales a 0");
+            return false;
+        }
+    }
+
+    boolean retirar(int valor) {
+        if ((valor > 0) && (valor <= saldo)) {
+            saldo = saldo - valor;
+            System.out.println("se ha retirado $" + valor + " en la cuenta. El saldo disponible ahora es de $" + saldo);
+            return true;
+        } else {
+            System.out.println("No se puede retirar mas plata de la que tiene.");
+            return false;
+        }
+    }
+
+    void aplicarInteres() {
+        float interes = saldo * (interesMensual / 100);
+        saldo += interes;
+        System.out.println("Se ha aplicado un interés de " + interesMensual + "%. su uevo saldo: $" + saldo);
+    }
+
+    public static void main(String args[]) {
+        banco cuenta = new banco("Nicolás", "Mojica", 123556789, Tipo.AHORROS, 5.5f);
+        cuenta.imprimir();
+        cuenta.consignar(12300);
+        cuenta.consignar(550000);
+        cuenta.retirar(120000);
+        cuenta.aplicarInteres();
+        cuenta.consultarSaldo();
+    }
+}
